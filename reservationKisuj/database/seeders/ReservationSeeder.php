@@ -13,14 +13,13 @@ class ReservationSeeder extends Seeder
      */
     public function run(): void
     {
-        // Reservation::create([
-        //     'name'=>'mozso15',
-        //     'email'=>'mozso15@moriczref.hu',
-        //     'reservation_time'=>'2025-12-01 08:48:00',
-        //     'guests'=>4,
-        //     'note'=>'Szülinapi vacsi'
-        // ]);
+         Reservation::create([
+             'user_id' => 1,
+             'reservation_time'=>'2025-12-01 08:48:00',
+             'guests'=>4,
+             'note'=>'Szülinapi vacsi'
+        ]);
 
-        Reservation::factory()->count(10)->create();
-    }
+         Reservation::factory()->count(10)->create();
+     }
 }
