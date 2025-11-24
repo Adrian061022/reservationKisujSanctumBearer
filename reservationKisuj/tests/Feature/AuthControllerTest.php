@@ -51,7 +51,7 @@ class AuthControllerTest extends TestCase
       //Arrange
       $user = User::factory()->create([
         'email' => 'teszt@gmail.com',
-        'password' => bycrypt('password')
+        'password' => 'password'
       ]);
       
       $credentials = [
@@ -65,9 +65,18 @@ class AuthControllerTest extends TestCase
 
       }
 
-    //   #[Test]
-    //   public function user_can_logout()
-    //   {
+       #[Test]
+       public function user_can_logout()
+       {
+        $user = User::factory()->create();
+        $token = $user->createToken('auth_token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+          'Authorization' => 'Bearer ' . $token,
+        ])->postJson('/api/logout');
 
-    //   }
+        $response->assertStatus(200)->assertJson([
+          'message' => 'Logged out successfully',
+        ]);
+       }
  }
